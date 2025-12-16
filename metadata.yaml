@@ -1,0 +1,9 @@
+name: Engage-X Touchpoint Tag
+description: >
+  Google Tag Manager template for capturing engagement and touchpoint
+  signals across a website. This template does not set cookies,
+  trigger conversions, or influence attribution.
+type: tag
+categories:
+  - Advertising
+  - Analytics
