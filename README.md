@@ -34,4 +34,4 @@ Transaction or conversion parameters (if present) are used for contextual refere
 and do not trigger attribution.
 
 ## License
-MIT License
+This project is licensed under the Apache License, Version 2.0.
