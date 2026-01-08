@@ -44,18 +44,9 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Event Type",
     "macrosInSelect": true,
     "selectItems": [
-      {
-        "value": "PageView",
-        "displayValue": ""
-      },
-      {
-        "value": "Conversion",
-        "displayValue": ""
-      },
-      {
-        "value": "AddToCart",
-        "displayValue": ""
-      }
+      { "value": "PageView", "displayValue": "" },
+      { "value": "Conversion", "displayValue": "" },
+      { "value": "AddToCart", "displayValue": "" }
     ],
     "simpleValueType": true
   },
@@ -75,34 +66,113 @@ ___TEMPLATE_PARAMETERS___
     "defaultValue": "USD",
     "help": "Enter currency code (e.g., USD, EUR)",
     "canBeEmptyString": true
+  },
+
+  {
+    "type": "TEXT",
+    "name": "clickId",
+    "displayName": "Click ID (required for attribution)",
+    "simpleValueType": true,
+    "canBeEmptyString": false,
+    "notSetText": "Click ID is required.",
+    "help": "Pass a valid click identifier (e.g. ex_click_id, gclid, msclkid). Required for AddToCart and Conversion."
+  },
+  {
+    "type": "TEXT",
+    "name": "orderId",
+    "displayName": "Order / Transaction ID",
+    "simpleValueType": true,
+    "canBeEmptyString": true,
+    "help": "Required when Event Type is Conversion."
+  },
+  {
+    "type": "TEXT",
+    "name": "attributionWindowDays",
+    "displayName": "Attribution Window (days)",
+    "simpleValueType": true,
+    "defaultValue": "7",
+    "help": "Conversion will only be sent if the last click is within this window."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "requireConsent",
+    "displayName": "Require user consent",
+    "simpleValueType": true,
+    "defaultValue": true
   }
 ]
 
-
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-// EngageX Pixel Tag
+// EngageX Pixel Tag (Compliance Safe)
+
 const sendPixel = require('sendPixel');
 const encode = require('encodeUriComponent');
+const getQueryParameters = require('getQueryParameters');
+const isConsentGranted = require('isConsentGranted');
+const logToConsole = require('logToConsole');
 
-// Hole die Feldwerte
-const partnerId = data.partnerId;
-const eventType = data.eventType || 'PageView';
-const orderValue = data.orderValue || '';
-const currency = data.currency || 'USD';
+// === Inputs ===
+const partnerId = (data.partnerId || '').trim();
+const eventType = (data.eventType || 'PageView').trim(); // Default safe
+const orderValue = (data.orderValue || '').trim();
+const currency = (data.currency || 'USD').trim();
+const orderId = (data.orderId || '').trim();
+const requireConsent = !!data.requireConsent;
 
-// Baue die URL ohne Backticks (GTM akzeptiert kein Template-Literal)
-const pixelUrl = "https://a1.engage-x.io/?pid=" + encode(partnerId) +
-                 "&ev=" + encode(eventType) +
-                 "&val=" + encode(orderValue) +
-                 "&cur=" + encode(currency);
+// === 1) Consent Gate ===
+if (requireConsent && !isConsentGranted('ad_storage')) {
+  logToConsole('[EngageX] Blocked: consent missing');
+  data.gtmOnFailure();
+  return;
+}
 
-// Pixel senden
+// === 2) Basic validation ===
+if (!partnerId) {
+  data.gtmOnFailure();
+  return;
+}
+
+// === 3) Click-Proof (required for attribution events) ===
+const qp = getQueryParameters();
+const clickId =
+  (data.clickId || '').trim() ||
+  (qp.ex_click_id && qp.ex_click_id[0]) ||
+  (qp.gclid && qp.gclid[0]) ||
+  (qp.msclkid && qp.msclkid[0]);
+
+const needsAttribution =
+  eventType === 'AddToCart' || eventType === 'Conversion';
+
+if (needsAttribution && !clickId) {
+  logToConsole('[EngageX] Blocked: missing clickId');
+  data.gtmOnFailure();
+  return;
+}
+
+// === 4) Conversion validation ===
+if (eventType === 'Conversion' && !orderId) {
+  logToConsole('[EngageX] Blocked: missing orderId');
+  data.gtmOnFailure();
+  return;
+}
+
+// === 5) Build URL ===
+let pixelUrl =
+  'https://a1.engage-x.io/?' +
+  'pid=' + encode(partnerId) +
+  '&ev=' + encode(eventType) +
+  '&cur=' + encode(currency);
+
+if (orderValue) pixelUrl += '&val=' + encode(orderValue);
+if (clickId) pixelUrl += '&cid=' + encode(clickId);
+if (orderId) pixelUrl += '&oid=' + encode(orderId);
+
+// === 6) Fire ===
 sendPixel(pixelUrl);
 
-// Erfolg melden
+// === 7) Success (exactly once) ===
 data.gtmOnSuccess();
-
 
 ___WEB_PERMISSIONS___
 
