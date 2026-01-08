@@ -67,14 +67,12 @@ ___TEMPLATE_PARAMETERS___
     "help": "Enter currency code (e.g., USD, EUR)",
     "canBeEmptyString": true
   },
-
   {
     "type": "TEXT",
     "name": "clickId",
     "displayName": "Click ID (required for attribution)",
     "simpleValueType": true,
-    "canBeEmptyString": false,
-    "notSetText": "Click ID is required.",
+    "canBeEmptyString": true,
     "help": "Pass a valid click identifier (e.g. ex_click_id, gclid, msclkid). Required for AddToCart and Conversion."
   },
   {
