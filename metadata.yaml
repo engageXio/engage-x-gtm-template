@@ -1,12 +1,15 @@
-id: engagex_touchpoint_tag
-name: Engage-X Touchpoint Tag
+id: engage_x_pixel
+name: Engage-X Pixel
 version: "1.0.0"
 description: >
-  Google Tag Manager template for capturing engagement and touchpoint
-  signals across a website. Does not set cookies, trigger conversions,
-  or influence attribution.
+  Google Tag Manager template for the Engage-X advertising pixel.
+  Loads the Engage-X tracking script and supports page type,
+  product data, transaction data and consent parameters.
+
 author: Engage-X
 license: Apache-2.0
 type: TAG
+
 homepage: https://engage-x.io
 documentation: https://github.com/engageXio/engage-x-gtm-template
+support: https://engage-x.io
