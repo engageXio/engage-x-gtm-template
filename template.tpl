@@ -6,6 +6,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Engage-X Pixel",
+  "categories": ["ADVERTISING"],
   "brand": {
     "id": "brand_engage_x",
     "displayName": "Engage-X",
