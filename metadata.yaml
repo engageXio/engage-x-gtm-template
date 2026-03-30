@@ -1,17 +1,6 @@
-id: engage_x_pixel
-name: Engage-X Pixel
-version: "1.0.0"
-description: >
-  Google Tag Manager template for the Engage-X advertising pixel.
-  Loads the Engage-X tracking script and supports page type,
-  product data, transaction data and consent parameters.
+homepage: "https://engage-x.io"
+documentation: "https://github.com/engageXio/engage-x-gtm-template"
 
-author: Engage-X
-license: Apache-2.0
-type: TAG
-
-homepage: https://engage-x.io
-documentation: https://github.com/engageXio/engage-x-gtm-template
-support: https://engage-x.io
-categories:
-  - ADVERTISING
+versions:
+  - sha: a3edc6e73344a9c6e68fd815c534d3b4bbb6becb
+    changeNotes: Initial release of the Engage-X Pixel GTM template.
