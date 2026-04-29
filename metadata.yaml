@@ -2,5 +2,5 @@ homepage: "https://engage-x.io"
 documentation: "https://github.com/engageXio/engage-x-gtm-template"
 
 versions:
-  - sha: 7a894915d5b9b899a25bad43971c885d20c70a02
+  - sha: 86e1c5a110421c44ed76e47473c9034def923045
     changeNotes: Initial release of the Engage-X Pixel GTM template.
