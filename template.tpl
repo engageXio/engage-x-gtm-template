@@ -288,18 +288,3 @@ OPTIONAL — passed only when non-empty:
   glk_txnvalue   — Order value (numeric)
   glk_currency   — Currency code (e.g. EUR, USD)
   glk_custom     — Custom data string
-
-FIRING:
-  Configure one GTM tag per page type, or use a single tag with dynamic
-  variable values driven by the dataLayer or JavaScript variables.
-
-GALLERY SUBMISSION:
-  This template is structured according to Google Tag Manager Template Gallery
-  requirements. Before submitting:
-    1. Add a representative icon (PNG, 64x64px) via the Template Editor UI.
-    2. Fill in the gallery metadata (category, vendor URL, support URL).
-    3. Test thoroughly using GTM Preview mode across all page types.
-    4. Export the final .tpl from the GTM Template Editor.
-
-VERSION HISTORY:
-  v1.0.0 — Initial release
