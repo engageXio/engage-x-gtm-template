@@ -5,6 +5,7 @@ Template Gallery Developer Terms of Service available at
 https://developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
+___INFO___
 /*
  * Copyright 2026 engageXio
  *
@@ -20,8 +21,6 @@ Google may provide), as modified from time to time.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-___INFO___
 
 {
   "type": "TAG",
