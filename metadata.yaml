@@ -3,5 +3,5 @@ documentation: "https://github.com/engageXlo/engage-x-gtm-template/blob/main/REA
 categories: ["ADVERTISING"]
 
 versions:
-  - sha: REPLACE_WITH_GITHUB_COMMIT_SHA
+  - sha: 39077cb53aa9d47cfa4ac2ff470dd7ac01103f30
     changeNotes: Initial release of Engage-X Pixel GTM Custom Tag Template.
