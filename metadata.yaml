@@ -1,7 +1,7 @@
 homepage: "https://engage-x.io"
-documentation: "https://github.com/engageXlo/engage-x-gtm-template/blob/main/README.md"
+documentation: "https://github.com/engageXio/engage-x-gtm-template/blob/main/README.md"
 categories: ["ADVERTISING"]
 
 versions:
-  - sha: 39077cb53aa9d47cfa4ac2ff470dd7ac01103f30
+  - sha: 133d96705c0afb87c35595edc7e914550212d10d
     changeNotes: Initial release of Engage-X Pixel GTM Custom Tag Template.
