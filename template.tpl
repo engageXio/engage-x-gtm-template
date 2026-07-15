@@ -222,7 +222,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://a1.engage-x.io/"
+                "string": "https://a1.engage-x.io/*"
               }
             ]
           }
