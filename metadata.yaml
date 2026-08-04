@@ -2,7 +2,7 @@ homepage: "https://engage-x.io"
 documentation: "https://github.com/engageXio/engage-x-gtm-template/blob/main/README.md"
 
 versions:
-  - sha: 
+  - sha: 2d56161174c14d6a4667be6e3fe75329caf8f692
     changeNotes: Added categories to template.tpl and fixed gallery submission requirements.
   - sha: 63c2d0412ebf5f083518752de90eab5fd3e629c5
     changeNotes: Update LICENSE to match official Apache 2.0 text and fix terms of service.
