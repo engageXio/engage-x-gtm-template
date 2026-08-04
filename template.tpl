@@ -14,17 +14,19 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Engage-X Pixel",
-  "categories": ["ADVERTISING"],
+  "categories": [
+    "ADVERTISING"
+  ],
   "brand": {
     "id": "brand_engage_x",
-    "displayName": "Engage-X",
-    "thumbnail": ""
+    "displayName": "Engage-X"
   },
   "description": "Engage-X Advertising Pixel Tag. Loads the Engage-X tracking script and supports all standard parameters including program ID, page type, product data, transaction data, consent and custom values.",
   "containerContexts": [
     "WEB"
   ]
 }
+
 
 ___TEMPLATE_PARAMETERS___
 
@@ -66,15 +68,42 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "help": "Select the page type for this tag configuration.",
         "selectItems": [
-          { "value": "START",      "displayValue": "Start / Homepage" },
-          { "value": "PRODUCT",    "displayValue": "Product Page" },
-          { "value": "CATALOG",    "displayValue": "Catalog / Category Page" },
-          { "value": "SEARCH",     "displayValue": "Search Results Page" },
-          { "value": "WISHLIST",   "displayValue": "Wishlist Page" },
-          { "value": "CART",       "displayValue": "Cart Page" },
-          { "value": "CHECKOUT",   "displayValue": "Checkout Page" },
-          { "value": "ORDER",      "displayValue": "Order Confirmation Page" },
-          { "value": "CONVERSION", "displayValue": "Conversion Page" }
+          {
+            "value": "START",
+            "displayValue": "Start / Homepage"
+          },
+          {
+            "value": "PRODUCT",
+            "displayValue": "Product Page"
+          },
+          {
+            "value": "CATALOG",
+            "displayValue": "Catalog / Category Page"
+          },
+          {
+            "value": "SEARCH",
+            "displayValue": "Search Results Page"
+          },
+          {
+            "value": "WISHLIST",
+            "displayValue": "Wishlist Page"
+          },
+          {
+            "value": "CART",
+            "displayValue": "Cart Page"
+          },
+          {
+            "value": "CHECKOUT",
+            "displayValue": "Checkout Page"
+          },
+          {
+            "value": "ORDER",
+            "displayValue": "Order Confirmation Page"
+          },
+          {
+            "value": "CONVERSION",
+            "displayValue": "Conversion Page"
+          }
         ],
         "valueValidators": [
           {
@@ -159,15 +188,13 @@ ___TEMPLATE_PARAMETERS___
   }
 ]
 
+
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 // ─── Require GTM Sandboxed APIs ───────────────────────────────────────────────
-var createArgumentsQueue = require('createArgumentsQueue');
-var injectScript         = require('injectScript');
-var setInWindow          = require('setInWindow');
-var copyFromWindow       = require('copyFromWindow');
-var makeString           = require('makeString');
-var log                  = require('logToConsole');
+var injectScript = require('injectScript');
+var setInWindow  = require('setInWindow');
+var makeString   = require('makeString');
 
 // ─── Helper: set a window variable only if the value is non-empty ─────────────
 function setIfProvided(varName, value) {
@@ -201,10 +228,11 @@ var PIXEL_URL = 'https://a1.engage-x.io/';
 
 injectScript(
   PIXEL_URL,
-  data.gtmOnSuccess,   // called when script loads successfully
-  data.gtmOnFailure,   // called when script fails to load
-  PIXEL_URL            // cache token — GTM will not inject the same URL twice
+  data.gtmOnSuccess,
+  data.gtmOnFailure,
+  PIXEL_URL
 );
+
 
 ___WEB_PERMISSIONS___
 
@@ -247,16 +275,396 @@ ___WEB_PERMISSIONS___
           "value": {
             "type": 2,
             "listItem": [
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_network"},   {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_program"},    {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_pagetype"},   {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_euconsent"},  {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_product"},    {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_txnproducts"},{"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_txnid"},      {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_txnvalue"},   {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_currency"},   {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] },
-              { "type": 3, "mapKey": [{"type":1,"string":"key"},{"type":1,"string":"read"},{"type":1,"string":"write"},{"type":1,"string":"execute"}], "mapValue": [{"type":1,"string":"glk_custom"},     {"type":8,"boolean":false},{"type":8,"boolean":true},{"type":8,"boolean":false}] }
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_network"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_program"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_pagetype"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_euconsent"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_product"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_txnproducts"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_txnid"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_txnvalue"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_currency"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "glk_custom"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              }
             ]
           }
         }
@@ -268,6 +676,12 @@ ___WEB_PERMISSIONS___
     "isRequired": true
   }
 ]
+
+
+___TESTS___
+
+scenarios: []
+
 
 ___NOTES___
 
